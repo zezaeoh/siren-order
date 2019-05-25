@@ -6,18 +6,18 @@ import java.util.List;
 import com.sirenPOS.foodcourt.Customer;
 import com.sirenPOS.foodcourt.Receipt;
 import com.sirenPOS.foodcourt.Store;
-import com.sirenPOS.order.Food;
+import com.sirenPOS.order.OrderedFood;
 import com.sirenPOS.payment.Payment;
 
 public class Reservation {
 	private Date date;
 	private Store store;
-	private List<Food> orderedFoods;
+	private List<OrderedFood> orderedFoods;
 	private Payment payment;
 	private Customer customer;
 	
 	// reservation have to generated with the following information
-	public Reservation(Store store, List<Food> orderedFoods, Payment payment, Customer customer) {
+	public Reservation(Store store, List<OrderedFood> orderedFoods, Payment payment, Customer customer) {
 		date = new Date();
 		this.store = store;
 		this.orderedFoods = orderedFoods;
@@ -33,7 +33,7 @@ public class Reservation {
 	public Store getStore() {
 		return store;
 	}
-	public List<Food> getOrderedFoods() {
+	public List<OrderedFood> getOrderedFoods() {
 		return orderedFoods;
 	}
 	public Payment getPayment() {

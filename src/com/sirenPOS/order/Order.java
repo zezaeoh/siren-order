@@ -19,7 +19,7 @@ public class Order {
 	private Date date;
 	private Store store;
 
-	private List<Food> orderedFoods;
+	private List<OrderedFood> orderedFoods;
 	private Payment payment;
 	private Reservation reservation;
 	private Customer customer;
@@ -52,7 +52,7 @@ public class Order {
 
 	// add Food to orderdFoods list
 	public void addFood(MenuDesciption desc, int quantity) {
-		Food food = new Food(quantity, desc);
+		OrderedFood food = new OrderedFood(quantity, desc);
 		orderedFoods.add(food);
 	}
 
@@ -70,7 +70,7 @@ public class Order {
 	// make total price included tax price
 	public int getTotalWithTaxInclude(TaxManager tax) {
 		int total = 0;
-		for (Food f : orderedFoods)
+		for (OrderedFood f : orderedFoods)
 			total += f.getSubtotal();
 
 		return tax.includeTax(total);
