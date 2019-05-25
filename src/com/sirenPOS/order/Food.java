@@ -1,6 +1,6 @@
 package com.sirenPOS.order;
 
-import com.sirenPOS.MenuDesciption;
+import com.sirenPOS.foodcourt.MenuDesciption;
 
 public class Food {
 	private int quantity;
@@ -9,5 +9,9 @@ public class Food {
 	public Food(int quantity, MenuDesciption desc) {
 		this.quantity = quantity;
 		this.desc = desc;
+	}
+
+	public int getSubtotal() {
+		return desc.getPrice() * quantity;
 	}
 }

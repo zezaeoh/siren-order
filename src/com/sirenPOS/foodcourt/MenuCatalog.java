@@ -1,10 +1,10 @@
-package com.sirenPOS;
+package com.sirenPOS.foodcourt;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class MenuCatalog {
-	Map<Integer, MenuDesciption> table;
+	private Map<Integer, MenuDesciption> table;
 	
 	public MenuCatalog() {
 		table = new HashMap<>();
@@ -15,5 +15,4 @@ public class MenuCatalog {
 			return table.get(menuId);
 		return null;
 	}
-
 }
