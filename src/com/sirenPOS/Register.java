@@ -91,7 +91,7 @@ public class Register {
 		return rc;
 	}
 	
-	public void sendReservationAlret(int orderId) {
+	public void sendReservationAlert(int orderId) {
 		
 	}
 	
