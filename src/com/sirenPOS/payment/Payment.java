@@ -7,7 +7,6 @@ public abstract class Payment {
 	private String type;
 	
 	public Payment(int amount, String type) {
-		super();
 		this.amount = amount;
 		this.type = type;
 	}

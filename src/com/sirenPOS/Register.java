@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import com.sirenPOS.Refund.Refund;
+import com.sirenPOS.alert.AlertManager;
 import com.sirenPOS.foodcourt.FoodCourt;
 import com.sirenPOS.foodcourt.MenuCatalog;
 import com.sirenPOS.foodcourt.MenuDesciption;
@@ -138,9 +139,19 @@ public class Register {
 		return rc;
 	}
 	
-	public void sendReservationAlert(int orderId) {
+	public void sendReservationAlert(int orderId) throws Exception{
+		if(currentOrder != null)
+			throw new Exception("There is already pending order!");
 		
+		currentOrder = foodCourt.getOrder(orderId);
+		if(currentOrder == null)
+			throw new Exception("This is invalid order id!");
+		if(currentOrder.getReservation() == null)
+			throw new Exception("This order is not reserved order!");
+		
+		AlertManager.getInstance().sendAlert(currentOrder.getCustomer());
 	}
+	
 	
 	/* for code readability */
 	private void completOrder() {

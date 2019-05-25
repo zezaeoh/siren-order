@@ -87,8 +87,14 @@ public class Order {
 	public Store getStore() {
 		return store;
 	}
+	public Reservation getReservation() {
+		return reservation;
+	}
 	public Payment getPayment() {
 		return payment;
+	}
+	public Customer getCustomer() {
+		return customer;
 	}
 	public void setRefund(Refund refund) {
 		this.refund = refund;
