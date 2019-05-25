@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import com.sirenPOS.Refund.Refund;
 import com.sirenPOS.foodcourt.FoodCourt;
 import com.sirenPOS.foodcourt.MenuCatalog;
 import com.sirenPOS.foodcourt.MenuDesciption;
@@ -15,12 +16,14 @@ import com.sirenPOS.tax.TaxManager;
 
 public class Register {
 	private Order currentOrder;
+	private Refund currentRefund;
 	private TaxManager taxManager;
 	private FoodCourt foodCourt;
 	private Queue<Reservation> reservationWaitingQueue;
 	
 	public Register(TaxManager tm, FoodCourt fc) {
 		currentOrder = null;
+		currentRefund = null;
 		reservationWaitingQueue = new LinkedList<>();
 		
 		taxManager = tm;
@@ -29,15 +32,17 @@ public class Register {
 	
 	/* for Order and Sale */
 	public void makeNewOrder(int storeId) throws Exception {
+		if(currentRefund != null)
+			throw new Exception("You can not proceed during the refund process.");
 		if(currentOrder != null)
-			throw new Exception("there is already pending order!");
+			throw new Exception("There is already pending order!");
 		
 		currentOrder = new Order(new Date(), foodCourt.getStore(storeId));
 	}
 	
 	public int enterFood(int menuId, int quantity) throws Exception{
 		if(currentOrder == null)
-			throw new Exception("there is no ongoing order!");
+			throw new Exception("There is no ongoing order!");
 		
 		MenuCatalog catalog = currentOrder.getStore().getMenuCatalog();
 		MenuDesciption desc = catalog.getMenuDesc(menuId);
@@ -69,6 +74,48 @@ public class Register {
 		Receipt rc = currentOrder.makePayment(PaymentType.CASH, amount, cash);
 		completOrder();
 		return rc;
+	}
+	
+	/* for refund */
+	public void makeNewRefund() throws Exception{
+		if(currentOrder != null)
+			throw new Exception("You can not proceed during the order process.");
+		if(currentRefund != null)
+			throw new Exception("There is already pending refund!");
+		
+		currentRefund = new Refund(new Date());
+	}
+	
+	public void findOrder(int orderId) throws Exception{
+		if(currentRefund == null)
+			throw new Exception("There is no ongoing refund!");
+		
+		currentOrder = foodCourt.getOrder(orderId);
+		if(currentOrder == null)
+			throw new Exception("This is invalid order id!");
+		
+		currentOrder.setRefund(currentRefund);
+	}
+	
+	public Receipt refundPayment() throws Exception{
+		if(currentRefund == null)
+			throw new Exception("There is no ongoing refund!");
+		if(currentOrder == null)
+			throw new Exception("There is no ongoing order!");
+		
+		return currentOrder.getPayment().refundPayment();
+	}
+	
+	public void addRefundInfo(String description) throws Exception{ // description -> why customer did refund?
+		if(currentRefund == null)
+			throw new Exception("There is no ongoing refund!");
+		if(currentOrder == null)
+			throw new Exception("There is no ongoing order!");
+		
+		currentRefund.setDescription(description);
+		currentOrder.updateOrder();
+		currentRefund = null;
+		currentOrder = null;
 	}
 	
 	/* for reservation and approval  */

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.sirenPOS.Refund.Refund;
 import com.sirenPOS.database.DatabaseManager;
 import com.sirenPOS.foodcourt.Customer;
 import com.sirenPOS.foodcourt.MenuDesciption;
@@ -23,6 +24,7 @@ public class Order {
 	private Payment payment;
 	private Reservation reservation;
 	private Customer customer;
+	private Refund refund;
 
 	// normal order constructor
 	public Order(Date date, Store store) {
@@ -66,6 +68,11 @@ public class Order {
 	public void endOrder() {
 		DatabaseManager.getInstance().insert(this);
 	}
+	
+	// update order from database
+	public void updateOrder(){
+		DatabaseManager.getInstance().update(this);
+	}
 
 	// make total price included tax price
 	public int getTotalWithTaxInclude(TaxManager tax) {
@@ -79,5 +86,11 @@ public class Order {
 	/* getter setter */
 	public Store getStore() {
 		return store;
+	}
+	public Payment getPayment() {
+		return payment;
+	}
+	public void setRefund(Refund refund) {
+		this.refund = refund;
 	}
 }

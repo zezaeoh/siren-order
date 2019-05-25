@@ -15,5 +15,9 @@ public class CreditPayment extends Payment {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	@Override
+	public Receipt refundPayment() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

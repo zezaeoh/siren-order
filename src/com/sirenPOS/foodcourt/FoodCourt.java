@@ -18,4 +18,13 @@ public class FoodCourt {
 	public void addCompletedOrder(Order order) {
 		completedOrders.add(order);
 	}
+
+	public Order getOrder(int orderId) {
+		Order order = null;
+		try {
+			order = completedOrders.get(orderId);
+		} catch (Exception e) {
+		}
+		return order;
+	}
 }

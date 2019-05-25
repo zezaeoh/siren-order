@@ -13,6 +13,7 @@ public abstract class Payment {
 	}
 
 	public abstract Receipt doPayment();
+	public abstract Receipt refundPayment();
 	
 	/* getter setter */
 	public int getAmount() {
