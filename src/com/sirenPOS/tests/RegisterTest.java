@@ -11,7 +11,6 @@ import org.junit.Test;
 import com.sirenPOS.Register;
 import com.sirenPOS.foodcourt.Customer;
 import com.sirenPOS.foodcourt.FoodCourt;
-import com.sirenPOS.foodcourt.MenuCatalog;
 import com.sirenPOS.foodcourt.MenuDescription;
 import com.sirenPOS.foodcourt.Receipt;
 import com.sirenPOS.foodcourt.Store;
@@ -105,30 +104,29 @@ public class RegisterTest {
 		assertNotNull(register.getCurrentRefund());
 	}
 
-	
-	@Test 
-	public void testFindOrder() throws Exception { 
+	@Test
+	public void testFindOrder() throws Exception {
 		register.makeNewOrder(storeId);
 		Receipt rc = register.makeCashPayment(totalAmnt, totalAmnt);
 		register.makeNewRefund();
 		register.findOrder(0);
 		assertNotNull(register.getCurrentRefund());
-		
+
 	}
-	
-	@Test 
+
+	@Test
 	public void testRefundPayment() throws Exception {
 		register.makeNewOrder(storeId);
 		register.makeCashPayment(totalAmnt, totalAmnt);
 		register.makeNewRefund();
 		register.findOrder(0);
-		
+
 		Receipt rc = register.refundPayment();
-		assertNotNull(rc); 
-	 }
-	  
-	@Test 
-	public void testAddRefundInfo() throws Exception{
+		assertNotNull(rc);
+	}
+
+	@Test
+	public void testAddRefundInfo() throws Exception {
 		register.makeNewOrder(storeId);
 		register.makeCashPayment(totalAmnt, totalAmnt);
 		register.makeNewRefund();
@@ -164,6 +162,5 @@ public class RegisterTest {
 		register.receiveReservation(reservation);
 		Receipt rc = register.approveReservation(reservation);
 		register.sendReservationAlert(0);
-
 	}
 }

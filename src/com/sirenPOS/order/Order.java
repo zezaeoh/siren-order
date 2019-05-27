@@ -25,7 +25,7 @@ public class Order {
 	private Reservation reservation;
 	private Customer customer;
 	private Refund refund;
-	
+
 	// normal order constructor
 	public Order(Date date, Store store) {
 		this.date = date;
@@ -36,6 +36,7 @@ public class Order {
 		customer = null;
 		orderedFoods = new LinkedList<>();
 	}
+
 	// normal order constructor with customer
 	public Order(Date date, Store store, Customer customer) {
 		this(date, store);
@@ -46,7 +47,7 @@ public class Order {
 	public Order(Date date, Reservation reservation) {
 		this.date = date;
 		this.reservation = reservation;
-		
+
 		store = reservation.getStore();
 		customer = reservation.getCustomer();
 		payment = reservation.getPayment();
@@ -69,9 +70,9 @@ public class Order {
 	public void endOrder() {
 		DatabaseManager.getInstance().insert(this);
 	}
-	
+
 	// update order from database
-	public void updateOrder(){
+	public void updateOrder() {
 		DatabaseManager.getInstance().update(this);
 	}
 
@@ -88,15 +89,19 @@ public class Order {
 	public Store getStore() {
 		return store;
 	}
+
 	public Reservation getReservation() {
 		return reservation;
 	}
+
 	public Payment getPayment() {
 		return payment;
 	}
+
 	public Customer getCustomer() {
 		return customer;
 	}
+
 	public void setRefund(Refund refund) {
 		this.refund = refund;
 	}

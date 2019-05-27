@@ -28,7 +28,7 @@ public class ReservationTest {
 		Customer customer = new Customer();
 		reservation = new Reservation(store, orderedFoods, payment, customer);
 	}
-	
+
 	@Test
 	public void testReservation() {
 		assertNotNull(reservation);
