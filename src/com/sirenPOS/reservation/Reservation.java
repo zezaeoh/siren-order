@@ -33,12 +33,15 @@ public class Reservation {
 	public Store getStore() {
 		return store;
 	}
+	
 	public List<OrderedFood> getOrderedFoods() {
 		return orderedFoods;
 	}
+	
 	public Payment getPayment() {
 		return payment;
 	}
+	
 	public Customer getCustomer() {
 		return customer;
 	}

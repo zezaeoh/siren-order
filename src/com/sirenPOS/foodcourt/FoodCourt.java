@@ -1,5 +1,7 @@
 package com.sirenPOS.foodcourt;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +10,11 @@ import com.sirenPOS.order.Order;
 public class FoodCourt {
 	private Map<Integer, Store> stores;
 	private List<Order> completedOrders;
+	
+	public FoodCourt() {
+		stores = new HashMap<Integer, Store>();
+		completedOrders = new ArrayList<Order>();
+	}
 	
 	public Store getStore(int storeId) {
 		if(stores.containsKey(storeId))
@@ -26,5 +33,9 @@ public class FoodCourt {
 		} catch (Exception e) {
 		}
 		return order;
+	}
+	
+	public void addStore(int storeId, Store store) {
+		stores.put(storeId, store);
 	}
 }

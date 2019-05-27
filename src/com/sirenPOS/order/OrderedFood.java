@@ -1,12 +1,12 @@
 package com.sirenPOS.order;
 
-import com.sirenPOS.foodcourt.MenuDesciption;
+import com.sirenPOS.foodcourt.MenuDescription;
 
 public class OrderedFood {
 	private int quantity;
-	private MenuDesciption desc;
+	private MenuDescription desc;
 	
-	public OrderedFood(int quantity, MenuDesciption desc) {
+	public OrderedFood(int quantity, MenuDescription desc) {
 		this.quantity = quantity;
 		this.desc = desc;
 	}

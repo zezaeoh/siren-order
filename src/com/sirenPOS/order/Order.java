@@ -7,7 +7,7 @@ import java.util.List;
 import com.sirenPOS.Refund.Refund;
 import com.sirenPOS.database.DatabaseManager;
 import com.sirenPOS.foodcourt.Customer;
-import com.sirenPOS.foodcourt.MenuDesciption;
+import com.sirenPOS.foodcourt.MenuDescription;
 import com.sirenPOS.foodcourt.Receipt;
 import com.sirenPOS.foodcourt.Store;
 import com.sirenPOS.payment.Payment;
@@ -25,7 +25,7 @@ public class Order {
 	private Reservation reservation;
 	private Customer customer;
 	private Refund refund;
-
+	
 	// normal order constructor
 	public Order(Date date, Store store) {
 		this.date = date;
@@ -45,7 +45,8 @@ public class Order {
 	// reserved order constructor
 	public Order(Date date, Reservation reservation) {
 		this.date = date;
-
+		this.reservation = reservation;
+		
 		store = reservation.getStore();
 		customer = reservation.getCustomer();
 		payment = reservation.getPayment();
@@ -53,7 +54,7 @@ public class Order {
 	}
 
 	// add Food to orderdFoods list
-	public void addFood(MenuDesciption desc, int quantity) {
+	public void addFood(MenuDescription desc, int quantity) {
 		OrderedFood food = new OrderedFood(quantity, desc);
 		orderedFoods.add(food);
 	}

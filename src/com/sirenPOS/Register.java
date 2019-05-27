@@ -8,7 +8,7 @@ import com.sirenPOS.Refund.Refund;
 import com.sirenPOS.alert.AlertManager;
 import com.sirenPOS.foodcourt.FoodCourt;
 import com.sirenPOS.foodcourt.MenuCatalog;
-import com.sirenPOS.foodcourt.MenuDesciption;
+import com.sirenPOS.foodcourt.MenuDescription;
 import com.sirenPOS.foodcourt.Receipt;
 import com.sirenPOS.order.Order;
 import com.sirenPOS.payment.PaymentType;
@@ -31,13 +31,23 @@ public class Register {
 		foodCourt = fc;
 	}
 	
+	/********************* For JUnit **************************/
+	public Order getCurrentOrder() {
+		return currentOrder;
+	}
+	
+	public Refund getCurrentRefund() {
+		return currentRefund;
+	}
+	/**********************************************************/
+	
 	/* for Order and Sale */
 	public void makeNewOrder(int storeId) throws Exception {
+		
 		if(currentRefund != null)
 			throw new Exception("You can not proceed during the refund process.");
 		if(currentOrder != null)
 			throw new Exception("There is already pending order!");
-		
 		currentOrder = new Order(new Date(), foodCourt.getStore(storeId));
 	}
 	
@@ -46,11 +56,12 @@ public class Register {
 			throw new Exception("There is no ongoing order!");
 		
 		MenuCatalog catalog = currentOrder.getStore().getMenuCatalog();
-		MenuDesciption desc = catalog.getMenuDesc(menuId);
+		MenuDescription desc = catalog.getMenuDesc(menuId);
 		
 		currentOrder.addFood(desc, quantity);
 		return currentOrder.getTotalWithTaxInclude(taxManager);
 	}
+	
 	
 	public void cancelOrder() throws Exception{
 		if(currentOrder == null)
@@ -58,7 +69,7 @@ public class Register {
 		
 		currentOrder = null;
 	}
-	
+
 	public Receipt makeCreditPayment(int amount, String creditCardInfo) throws Exception{
 		if(currentOrder == null)
 			throw new Exception("there is no ongoing order!");
@@ -79,7 +90,7 @@ public class Register {
 	
 	/* for refund */
 	public void makeNewRefund() throws Exception{
-		if(currentOrder != null)
+		if(currentOrder != null )
 			throw new Exception("You can not proceed during the order process.");
 		if(currentRefund != null)
 			throw new Exception("There is already pending refund!");
@@ -151,7 +162,6 @@ public class Register {
 		
 		AlertManager.getInstance().sendAlert(currentOrder.getCustomer());
 	}
-	
 	
 	/* for code readability */
 	private void completOrder() {

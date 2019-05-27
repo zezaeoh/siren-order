@@ -4,20 +4,22 @@ import com.sirenPOS.foodcourt.Receipt;
 
 public class CreditPayment extends Payment {
 	private String creditCardInfo;
+	private int totalAmnt;
 	
-	public CreditPayment(int amount, String creditCardInfo) {
-		super(amount, "credit");
+	public CreditPayment(int totalAmnt, String creditCardInfo) {
+		super(totalAmnt, "credit");
+		this.totalAmnt=totalAmnt;
 		this.creditCardInfo = creditCardInfo;
 	}
 	
 	@Override
 	public Receipt doPayment() {
-		// TODO Auto-generated method stub
-		return null;
+		Receipt receipt = new Receipt(totalAmnt, totalAmnt);
+		return receipt;
 	}
 	@Override
 	public Receipt refundPayment() {
 		// TODO Auto-generated method stub
-		return null;
+		return new Receipt(0, 0);
 	}
 }

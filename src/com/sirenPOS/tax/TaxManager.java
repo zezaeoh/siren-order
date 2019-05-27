@@ -4,6 +4,6 @@ public class TaxManager {
 	
 	public int includeTax(int total) {
 		// calculate added tax 
-		return 0;
+		return total;
 	}
 }
